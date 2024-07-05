@@ -1,5 +1,5 @@
 const { Sequelize, sequelize, User } = require("../models");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.getUsers = function (req, res) {
@@ -24,8 +24,8 @@ exports.Register = function (req, res) {
   if (password !== confPassword)
     return res.status(400).json({ msg: "Password tidak cocok" });
 
-  bcrypt.genSalt().then(function (salt) {
-    bcrypt.hash(password, salt).then(function (hashPassword) {
+  bcryptjs.genSalt().then(function (salt) {
+    bcryptjs.hash(password, salt).then(function (hashPassword) {
       User.create({
         name: name,
         email: email,
@@ -54,7 +54,7 @@ exports.Login = function (req, res) {
           .status(400)
           .json({ emailError: "email/username tidak ditemukan" });
 
-      bcrypt
+      bcryptjs
         .compare(req.body.password, user[0].password)
         .then(function (match) {
           if (!match)
