@@ -13,8 +13,7 @@ module.exports = {
     },
   },
   production: {
-    use_env_variable:
-      "mysql://ue7nauuuoyefckob:CtmFNaM6DPA0AcGZ6zFD@bfwyooz9tp4pksihicej-mysql.services.clever-cloud.com:3306/bfwyooz9tp4pksihicej",
+    use_env_variable: "DATABASE_URL",
     dialect: "mysql",
     dialectOptions: {
       ssl: {
